@@ -1,0 +1,18 @@
+<nav>
+    <ul>
+        <li><a class="active" href="/">Campaign Reports</a></li>
+    </ul>
+</nav>
+
+<script>
+    jQuery(document).ready(function(){
+        jQuery('[data-toggle="popover"]').popover();   
+    });
+
+    jQuery(document).on('blur','[data-toggle="popover"]', function() {
+        jQuery(this).popover('hide');
+    });
+</script>
+
+<div class="loader-overlay loading-el" style="display: none"></div>
+<div class="loader loading-el" style="display: none"></div>

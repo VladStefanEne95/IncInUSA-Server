@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+
+</header>
+
+<main>
+    <div class="jumbotron">
+			<h1>List of all the incorporations</h1>
+			<table>
+					<tr>
+					  <th>Uuid</th>
+					  <th>Company Name</th>
+					  <th>Company Type</th>
+					  <th>First Name</th>
+					  <th>Last Name</th>
+					  <th>Email</th>
+					  <th>Adress Line 1</th>
+					  <th>Adress Line 2</th>
+					  <th>City</th>
+					  <th>Postal Code</th>
+					  <th>Country</th>
+					  <th>State</th>
+					  <th>Status</th>
+					</tr>
+
+		<% incorporations.forEach(function(inc) { %>
+				<tr>
+					<td><%= inc.uuid %></td>
+					<td><%= inc.companyName %></td>
+					<td><%= inc.companyType %></td>
+					<td><%= inc.firstName %></td>
+					<td><%= inc.lastName %></td>
+					<td><%= inc.email %></td>
+					<td><%= inc.al1 %></td>
+					<td><%= inc.al2 %></td>
+					<td><%= inc.city %></td>
+					<td><%= inc.postal %></td>
+					<td><%= inc.country %></td>
+					<td><%= inc.state %></td>
+					<td><%= inc.status %></td>
+					<td><button onclick="goToIncorporation('<%= inc.uuid %>')"> Update status </button></td>
+				</tr>
+		<% }); %>
+			</table>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>
