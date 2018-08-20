@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var IncorporationDataModel = require('../models/incorporation-data.js');
+var IncorporationStatusModel = require('../models/incorporation-status.js');
 
 router.post('/', function(req, res){
 
-		let incorporationData = IncorporationDataModel ()
 		console.log(req.body.uuid);
 		IncorporationDataModel.findOneAndUpdate({uuid: req.body.uuid },{
 			$set:{
@@ -25,17 +25,43 @@ router.post('/', function(req, res){
 				$currentDate: {
 					createtime: true
 				  } 
-				}
-			}, {upsert: true}, function (err, result) {
-					if(err) console.log(err);
+			}
+		}, {upsert: true}, function (err, result) {
+				if(err) console.log(err);
 		});
+
+		let incorporationStatus = IncorporationStatusModel ({
+			uuid: req.body.uuid,
+			sumbitedDate: Date.now(),
+			reviewedDate: Date.now(),
+			payedDate: Date.now(),
+			sumbited: true,
+			reviewed: false,
+			payed: false
+		})
+		incorporationStatus.save();
+
+		// IncorporationStatusModel.findOneAndUpdate({uuid: req.body.uuid },{
+		// 	$set:{
+		// 			sumbitedDate: Date.now(),
+		// 			reviewedDate: Date.now(),
+		// 			payedDate: Date.now(),
+		// 			sumbited: true,
+		// 			reviewed:false,
+		// 			payed:false
+		// 		}
+		// 	}, {upsert: true}, function (err, result) {
+		// 		if(err) console.log(err);
+		// });
 		res.end('{"success" : "Updated Successfully", "status" : 200}');
 })
 
 
 router.get('/refresh/:uuid', function(req, res){
-	IncorporationDataModel.find({uuid: req.params.uuid}, function(err, incorporation){
-		res.send ({incorporation: incorporation});
+	IncorporationDataModel.find({uuid: req.params.uuid}, function(err, incorporation) {
+		IncorporationStatusModel.findOne({uuid: req.params.uuid}, function(err, status) {
+			res.send ({incorporation: incorporation, status: status});
+		})
 	})
 })
 

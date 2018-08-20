@@ -13,23 +13,33 @@
     <div class="jumbotron">
 			<h1>Update incorporation status</h1>
 			
-		<% incorporation.forEach(function(inc) { %>
 				<div>
-					<select id="stats-list">
-						<option value="<%= inc.status %>"><%= inc.status %></option>
-						<% if (inc.status != "Application Submitted") { %>
-							<option value="Application Submitted">Application Submitted</option>
-						<% } %>
-						<% if (inc.status != "Payment Accepted") { %>
-							<option value="Payment Accepted">Payment Accepted</option>
-						<% } %>
-						<% if (inc.status != "We are reviewing your application") { %>
-							<option value="We are reviewing your application">We are reviewing your application</option>
-						<% } %>
-					</select>
-					<button onclick="updateStatus('<%= inc.uuid %>')">Update</button>
+
+					<div>
+						<span>Application Submitted:</span>
+						<select id="submited">
+							<option value="<%= status.submited %>"><%= status.submited %></option>
+							<option value="<%= !status.submited %>"><%= !status.submited %></option>
+						</select>
+						<button onclick="updateSubmited('<%= incorporation.uuid %>')">Update</button>
+					</div>
+					<div>
+						<span>Payment Accepted:</span>
+						<select id="payment">
+						<option value="<%= status.payed %>"><%= status.payed %></option>
+						<option value="<%= !status.payed %>"><%= !status.payed %></option>
+						</select>
+						<button onclick="updatePayment('<%= incorporation.uuid %>')">Update</button>
+					</div>
+					<div>
+						<span>Reviewing Application:</span>
+						<select id="review">
+						<option value="<%= status.reviewed %>"><%= status.reviewed %></option>
+						<option value="<%= !status.reviewed %>"><%= !status.reviewed %></option>
+						</select>
+						<button onclick="updateReview('<%= incorporation.uuid %>')">Update</button>
+					</div>
 				</div>
-		<% }); %>
 			</table>
     </div>
 </main>
