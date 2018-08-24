@@ -24,7 +24,7 @@ router.get('/:uuid', function(req, res) {
 
 
 router.post('/:uuid', function(req, res) {
-	if(status == 'true')
+	if (req.body.status == 'true')
 		IncorporationDataModel.findOneAndUpdate({uuid: req.params.uuid}, {$set: {
 			status: req.body.typeValue,
 			$currentDate: {

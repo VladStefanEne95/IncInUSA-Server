@@ -4,7 +4,7 @@ var IncorporationDataModel = require('../models/incorporation-data.js');
 var stripe = require("stripe")("sk_test_vKr7IMkSJfHQMzVJysalzllt");
 
 router.post('/', function(req, res) {
-	let sum = 999;
+	let sum = req.body.sum * 100;
 	let currency = 'usd';
 	let description = 'Example';
 	console.log(req.body);

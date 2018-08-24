@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
 
-var IncorporationDataSchema = new mongoose.Schema({
+var IncorporationBillingSchema = new mongoose.Schema({
     uuid: {
         type: String,
         required: true
@@ -30,14 +30,6 @@ var IncorporationDataSchema = new mongoose.Schema({
 		type: String,
         required: true
 	},
-	companyName: {
-		type: String,
-        required: true
-	},
-	companyType: {
-		type: String,
-        required: true
-	},
 	postal: {
 		type: String,
         required: true
@@ -49,20 +41,8 @@ var IncorporationDataSchema = new mongoose.Schema({
 	emoji: {
 		type: String,
         required: true
-	} ,
-	state: {
-		type: String,
-        required: false
-	},
-	status: {
-		type: String,
-        required: true
-	},
-	directors: {
-		type: String,
-        required: true
 	}
-}, { timestamps: true });
+});
 
-mongoose.model('IncorporationData', IncorporationDataSchema);
-module.exports = mongoose.model('IncorporationData');
+mongoose.model('IncorporationBilling', IncorporationBillingSchema);
+module.exports = mongoose.model('IncorporationBilling');

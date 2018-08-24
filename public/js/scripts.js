@@ -12,6 +12,7 @@ function updateStatus(uuid) {
 		data: data,
 		dataType: "json"
 	});
+	location.reload()
 }
 
 function updatePayment(uuid) {
@@ -23,6 +24,7 @@ function updatePayment(uuid) {
 		data: data,
 		dataType: "json"
 	});
+	location.reload()
 }
 function updateSubmited(uuid) {
 	
@@ -33,6 +35,7 @@ function updateSubmited(uuid) {
 		data: data,
 		dataType: "json"
 	});
+	location.reload()
 }
 function updateReview(uuid) {
 	
@@ -43,4 +46,5 @@ function updateReview(uuid) {
 		data: data,
 		dataType: "json"
 	});
+	location.reload()
 }
