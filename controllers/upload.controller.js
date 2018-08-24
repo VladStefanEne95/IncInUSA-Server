@@ -8,11 +8,16 @@ var mkdirp = require('mkdirp');
 
 router.post('/', function(req, res, next) {
 	var outDir = path.join("./", "uploads", req.headers['uuid']);
-	  var fileName = req.headers["file-name"];
-
-	  var out = path.join(outDir, "upload-" + new Date().getTime() + "-" + fileName);
-
-	  mkdirp(outDir, function(err) { 
+	fs.readdir(outDir, (err, files) => {
+		if (err) throw err;
+		for (const file of files) {
+		  fs.unlink(path.join(outDir, file), err => {
+			if (err) throw err;
+		  });
+		}
+		let fileName = req.headers["file-name"];		
+		let out = path.join(outDir, "upload-" + new Date().getTime() + "-" + fileName);
+		mkdirp(outDir, function(err) { 
 		req.pipe(fs.createWriteStream(out, { flags: 'w', encoding: null, fd: null, mode: 0666 }));
 			req.on('end', function () {
 			setTimeout(function() {
@@ -23,6 +28,7 @@ router.post('/', function(req, res, next) {
 			}, 1000);
 			});
 		});
+	  });
 })
 
 

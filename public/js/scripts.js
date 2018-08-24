@@ -3,6 +3,10 @@ function goToIncorporation(uuid) {
 	window.location.href = window.location.pathname + "/" + uuid;	
 }
 
+function viewBilling(uuid) {
+	window.location.href = window.location.pathname + "/billing/" + uuid;	
+}
+
 function updateStatus(uuid) {
 	
 	let data = {status: $('#stats-list').val()};

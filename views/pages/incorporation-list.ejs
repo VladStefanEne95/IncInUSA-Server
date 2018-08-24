@@ -10,7 +10,7 @@
 </header>
 
 <main>
-    <div class="jumbotron">
+    <div >
 			<h1>List of all the incorporations</h1>
 			<table>
 					<tr>
@@ -45,6 +45,7 @@
 					<td><%= inc.state %></td>
 					<td><%= inc.status %></td>
 					<td><button onclick="goToIncorporation('<%= inc.uuid %>')"> Update status </button></td>
+					<td><button onclick="viewBilling('<%= inc.uuid %>')"> View Billing Information </button></td>
 				</tr>
 		<% }); %>
 			</table>

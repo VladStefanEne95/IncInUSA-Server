@@ -3,6 +3,8 @@ var router = express.Router();
 var IncorporationDataModel = require('../models/incorporation-data.js');
 var IncorporationStatusModel = require('../models/incorporation-status.js');
 var IncorporationBillingModel = require('../models/incorporation-billing.js');
+let path = require('path');
+let fs = require('fs');
 
 router.post('/', function(req, res){
 
@@ -42,6 +44,12 @@ router.post('/', function(req, res){
 			payed: false
 		})
 		incorporationStatus.save();
+		let pathToBeReplaced = path.join("./", "uploads", req.body.uuid);
+		let newPath = path.join("./", "uploads", req.body.companyName + req.body.companyType);
+		fs.rename(pathToBeReplaced, newPath, function (err) {
+			if (err) throw err;
+			console.log('renamed complete');
+		  });
 		res.end('{"success" : "Updated Successfully", "status" : 200}');
 })
 
@@ -53,9 +61,9 @@ router.post('/billing', function(req, res){
 			email: req.body.email, 
 			al1: req.body.al1, 
 			al2: req.body.al2,  
-			city: req.body.city, 
+			city: req.body.city,  
 			postal: req.body.postal, 
-			country: req.body.country, 
+			country: req.body.country,  
 			emoji: req.body.emoji,
 			uuid: req.body.uuid,
 		}
@@ -67,7 +75,7 @@ router.post('/billing', function(req, res){
 
 
 router.get('/refresh/:uuid', function(req, res){
-	IncorporationDataModel.find({uuid: req.params.uuid}, function(err, incorporation) {
+	IncorporationDataModel.findOne({uuid: req.params.uuid}, function(err, incorporation) {
 		IncorporationStatusModel.findOne({uuid: req.params.uuid}, function(err, status) {
 			res.send ({incorporation: incorporation, status: status});
 		})

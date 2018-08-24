@@ -2,14 +2,21 @@ var express = require('express');
 var router = express.Router();
 var IncorporationDataModel = require('../models/incorporation-data.js');
 var IncorporationStatusModel = require('../models/incorporation-status.js');
+var IncorporationBillingModel = require('../models/incorporation-billing.js');
 
 
 router.get('/', function(req, res) {
-	console.log("aici");
 	IncorporationDataModel.find({}, function(err, incorporations){
 		if(err) console.log(err);
 
 		res.render('pages/incorporation-list', {incorporations: incorporations});
+	})
+}) 
+
+router.get('/billing/:uuid', function(req, res) {
+	IncorporationBillingModel.findOne({uuid: req.params.uuid}, function(err, information) {
+		console.log(information);
+		res.render('pages/view-billing', {information: information});
 	})
 })
 
